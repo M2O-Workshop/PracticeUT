@@ -3,9 +3,8 @@
  */
 package sample;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 import java.math.BigDecimal;
 
@@ -19,102 +18,14 @@ import org.junit.Test;
  */
 public class PriceCheckTest {
   /**
-   * テストケース１ <br>
-   * クーポン：0（なし）
-   * 会員特典：true（あり） <br>
-   * @throws Exception 例外
-   */
-  @SuppressWarnings("static-access")
-  @Test
-  public void testCase1() throws Exception {
-    // テスト対象クラスのモック化
-    PriceCheck pc = mock(PriceCheck.class);
-    // 会員特典
-    when(pc.memberCheck()).thenReturn( true );
-    // クーポン指定
-    when(pc.couponCheck()).thenReturn( "0" );
-    
-    // 実測値と期待値を比較
-    assertEquals(PriceCheck.priceReturn(), new BigDecimal("10000"));
-  }
-  
-  /**
-   * テストケース２ <br>
-   * クーポン：1（5%OFF）
-   * 会員特典：false（なし） <br>
-   * @throws Exception 例外
-   */
-  @SuppressWarnings("static-access")
-  @Test
-  public void testCase2() throws Exception {
-    // テスト対象クラスのモック化
-    PriceCheck pc = mock(PriceCheck.class);
-    // クーポン指定
-    when(pc.couponCheck()).thenReturn( "1" );
-    // 会員特典
-    when(pc.memberCheck()).thenReturn( false );
-    
-    // 実測値と期待値を比較
-    assertEquals(pc.priceReturn(), new BigDecimal("10260"));
-  }
-  
-  /**
-   * テストケース３ <br>
+   * テストケース0 <br>
    * クーポン：2（10%OFF）
    * 会員特典：true（あり） <br>
    * @throws Exception 例外
    */
-  @SuppressWarnings("static-access")
   @Test
-  public void testCase3() throws Exception {
-    // テスト対象クラスのモック化
-    PriceCheck pc = mock(PriceCheck.class);
-    // クーポン指定
-    when(pc.couponCheck()).thenReturn( "2" );
-    // 会員特典
-    when(pc.memberCheck()).thenReturn( true );
-    
+  public void testCase0() throws Exception {
     // 実測値と期待値を比較
-    assertEquals(pc.priceReturn(), new BigDecimal("9000"));
-  }
-  
-  /**
-   * テストケース４ <br>
-   * クーポン：3（20%OFF）
-   * 会員特典：false（なし） <br>
-   * @throws Exception 例外
-   */
-  @SuppressWarnings("static-access")
-  @Test
-  public void testCase4() throws Exception {
-    // テスト対象クラスのモック化
-    PriceCheck pc = mock(PriceCheck.class);
-    // クーポン指定
-    when(pc.couponCheck()).thenReturn( "3" );
-    // 会員特典
-    when(pc.memberCheck()).thenReturn( false );
-    
-    // 実測値と期待値を比較
-    assertEquals(pc.priceReturn(), new BigDecimal("8640"));
-  }
-  
-  /**
-   * テストケース５ <br>
-   * クーポン：4（なし）
-   * 会員特典：false（なし） <br>
-   * @throws Exception 例外
-   */
-  @SuppressWarnings("static-access")
-  @Test
-  public void testCase5() throws Exception {
-    // テスト対象クラスのモック化
-    PriceCheck pc = mock(PriceCheck.class);
-    // クーポン指定
-    when(pc.couponCheck()).thenReturn( "4" );
-    // 会員特典
-    when(pc.memberCheck()).thenReturn( false );
-    
-    // 実測値と期待値を比較
-    assertEquals(pc.priceReturn(), new BigDecimal("10800"));
+    assertThat(PriceCheck.priceReturn(), is(new BigDecimal("90000")));
   }
 }
