@@ -7,68 +7,81 @@ package sample;
 import java.math.BigDecimal;
 
 /**
- * @author …Œ³ <br />
- * ‹àŠzŒˆ’èƒNƒ‰ƒX <br />
- * ‹àŠzA‰ïˆõî•ñAƒN[ƒ|ƒ“î•ñ‚ğæ“¾‚µAÅI“I‚È¿‹‹àŠz‚ğŒˆ’è‚·‚é <br />
- * XV—š—ğ 2017/04/05 …Œ³FV‹Kì¬ <br />
+ * @author æ°´å…ƒ <br />
+ * æ”¯æ‰•é‡‘é¡è¨ˆç®—ã‚¯ãƒ©ã‚¹ <br />
+ * å®šä¾¡ã€ä¼šå“¡ã€å‰²å¼•æƒ…å ±ã‚’å–å¾—ã—ã€æœ€çµ‚çš„ãªæ”¯æ‰•é‡‘é¡ã‚’è¨ˆç®—ã™ã‚‹ <br />
+ * æ›´æ–°å±¥æ­´ 2017/04/05 æ°´å…ƒï¼šæ–°è¦ä½œæˆ <br />
  */
 public class PriceCheck {
-  // ‹àŠz
-  private BigDecimal price;
-  // ‰ïˆõƒ`ƒFƒbƒN
-  private boolean member;
-  // ƒN[ƒ|ƒ“”Ô†
-  private String coupon;
-  // Á”ïÅ
-  private String tax;
-
+  // å®šä¾¡
+  private static BigDecimal price;
+  // ä¼šå“¡
+  private static boolean member;
+  // å‰²å¼•
+  private static String discount;
+  // æ¶ˆè²»ç¨è¾¼
+  public static final String TAX = "1.08";
+  
   /**
-   * ’lİ’èƒRƒ“ƒXƒgƒ‰ƒNƒ^ <br />
-   * ˆ—‚Ég—p‚·‚éƒIƒuƒWƒFƒNƒg‚É’l‚ğİ’è‚·‚é <br />
-   * @param price ‹àŠz
-   * @param member ‰ïˆõ
-   * @param coupon ƒN[ƒ|ƒ“
+   * å€¤è¨­å®šã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ <br />
+   * å‡¦ç†ã«ä½¿ç”¨ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«å€¤ã‚’è¨­å®šã™ã‚‹ <br />
+   * @param price å®šä¾¡
+   * @param member ä¼šå“¡
+   * @param discount å‰²å¼•
    */
-  PriceCheck( BigDecimal price, boolean member, String coupon ) {
-    this.price = price;
-    this.member = member;
-    this.coupon = coupon;
-    this.tax = "1.08";
+  PriceCheck( BigDecimal price, boolean member, String discount ) {
+    PriceCheck.price = price;
+    PriceCheck.member = member;
+    PriceCheck.discount = discount;
   }
-
+  
   /**
-   * ‹àŠzŒˆ’èƒNƒ‰ƒX <br />
-   * ‹àŠzA‰ïˆõî•ñAƒN[ƒ|ƒ“î•ñ‚ğæ“¾‚µAÅI“I‚È¿‹‹àŠz‚ğŒˆ’è‚·‚é <br />
-   * @throws Exception —áŠO
-   * @return price ‹àŠz
+   * ãƒ¡ã‚¤ãƒ³ãƒ¡ã‚½ãƒƒãƒ‰ <br />
+   * é‡‘é¡è¨ˆç®—ãƒ¡ã‚½ãƒƒãƒ‰ã‚’å®Ÿè¡Œ <br />
+   * @param args èµ·å‹•æ™‚å¼•æ•°
+   * @throws Exception ä¾‹å¤–
    */
-  public BigDecimal priceReturn() throws Exception {
-    // •Ô‚è’lŠi”[—p
-    BigDecimal finalPrice = new BigDecimal( 0 );
+  public static void main(String[] args) throws Exception {
+    // é‡‘é¡æ±ºå®šã‚¯ãƒ©ã‚¹ã‚’å®Ÿè¡Œ
+    // å¼•æ•°ã¯å¾Œã€…å¤–éƒ¨ã‹ã‚‰å…¥åŠ›ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹ã€‚
+    // ä»Šã¯ä»®ã®å€¤ã‚’å¼•æ•°ã¨ã™ã‚‹ã€‚
+    new PriceCheck(new BigDecimal("10000"), true, "1");
+    priceCal();
+  }
+  
+  /**
+   * é‡‘é¡è¨ˆç®—ãƒ¡ã‚½ãƒƒãƒ‰ <br />
+   * å®šä¾¡ã€ä¼šå“¡ã€å‰²å¼•æƒ…å ±ã‚’å–å¾—ã—ã€æœ€çµ‚çš„ãªæ”¯æ‰•é‡‘é¡ã‚’è¨ˆç®—ã™ã‚‹ <br />
+   * @throws Exception ä¾‹å¤–
+   * @return total 
+   */
+  public static BigDecimal priceCal() throws Exception {
+    // æ”¯æ‰•ã„é‡‘é¡æ ¼ç´ç”¨
+    BigDecimal payment = new BigDecimal( 0 );
     
-    // ƒN[ƒ|ƒ“‚Ìí—Ş‚É‚æ‚Á‚ÄŠ„ˆø
-    if (this.coupon.equals( "0" )) {
-      finalPrice = this.price;
+    // å‰²å¼•ã®ç¨®é¡ã§æ¡ä»¶åˆ†å²
+    if (discount.equals( "0" )) {
+      payment = price;
       
-    } else if (this.coupon.equals( "1" )) {
-      finalPrice = this.price.multiply( new BigDecimal( "0.95" ) );
+    } else if (discount.equals( "1" )) {
+      payment = price.multiply( new BigDecimal( "0.95" ) );
       
-    } else if (this.coupon.equals( "2" )) {
-      finalPrice = this.price.multiply( new BigDecimal( "0.90" ) );
+    } else if (discount.equals( "2" )) {
+      payment = price.multiply( new BigDecimal( "0.90" ) );
       
-    } else if (this.coupon.equals( "3" )) {
-      finalPrice = this.price.multiply( new BigDecimal( "0.80" ) );
+    } else if (discount.equals( "3" )) {
+      payment = price.multiply( new BigDecimal( "0.80" ) );
       
     } else {
-      finalPrice = this.price;
+      payment = price;
     }
     
-    // ‰ïˆõ‚Ìê‡AÁ”ïÅƒJƒbƒg
-    if ( !this.member ) {
-      finalPrice = finalPrice.multiply( new BigDecimal( this.tax ) );
+    // ä¼šå“¡ã®å ´åˆã€æ¶ˆè²»ç¨ã‚«ãƒƒãƒˆ
+    if ( !member ) {
+      payment = payment.multiply( new BigDecimal( TAX ) );
     }
     
-    // ÅI“I‚È‹àŠz‚ğ•Ô‚·i¬”“_ˆÈ‰º‚ÍŒJ‚èã‚°j
-    return finalPrice.setScale( 0, BigDecimal.ROUND_UP );
+    // æœ€çµ‚çš„ãªæ”¯æ‰•é‡‘é¡ã‚’è¿”ã™ï¼ˆå°æ•°ç‚¹ä»¥ä¸‹ã¯ç¹°ã‚Šä¸Šã’ï¼‰
+    return payment.setScale( 0, BigDecimal.ROUND_UP );
   }
 }
