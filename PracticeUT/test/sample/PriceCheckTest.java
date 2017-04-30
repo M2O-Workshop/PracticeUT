@@ -6,53 +6,67 @@ package sample;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-
 import java.math.BigDecimal;
-
 import org.junit.Test;
 
 /**
- * @author …Œ³ <br>
- * ‹àŠzŒˆ’èƒeƒXƒgƒNƒ‰ƒX <br>
- * Š„ˆøƒN[ƒ|ƒ“A‰ïˆõ“Á“T‚Ì—L–³‚Å‹àŠz‚ğŒˆ’è‚·‚é <br>
- * XV—š—ğ 2017/04/05 …Œ³FV‹Kì¬ <br>
+ * @author æ°´å…ƒ <br>
+ * é‡‘é¡æ±ºå®šãƒ†ã‚¹ãƒˆã‚¯ãƒ©ã‚¹ <br>
+ * å‰²å¼•ã€ä¼šå“¡ç‰¹å…¸ã‚’è€ƒæ…®ã—ãŸé‡‘é¡ã‚’è¨­å®šã™ã‚‹ <br>
+ * æ›´æ–°å±¥æ­´ 2017/04/05 æ°´å…ƒï¼šæ–°è¦ä½œæˆ <br>
  */
 public class PriceCheckTest {
   /**
-   * ƒeƒXƒgƒP[ƒX1 <br>
-   * ‹àŠzF100,000
-   * ‰ïˆõ“Á“TFtruei‚ ‚èj
-   * ƒN[ƒ|ƒ“F0i‚È‚µj <br>
-   * @throws Exception —áŠO
+   * ãƒ†ã‚¹ãƒˆã‚±ãƒ¼ã‚¹1 <br>
+   * ãƒ¡ã‚¤ãƒ³ãƒ¡ã‚½ãƒƒãƒ‰ã®æ­£å¸¸å‹•ä½œ<br>
+   * @throws Exception ä¾‹å¤–
    */
   @Test
   public void testCase1() throws Exception {
-    // ƒeƒXƒg‘ÎÛƒNƒ‰ƒX‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^‚Ìİ’è
+    // ãƒ†ã‚¹ãƒˆã®æº–å‚™:å¿…è¦ãªã—
+    // ãƒ†ã‚¹ãƒˆå¯¾è±¡ã‚¯ãƒ©ã‚¹ã®å®Ÿè¡Œ
+    PriceCheck.main(new String[]{});
+    // å®Ÿæ¸¬å€¤ã¨æœŸå¾…å€¤ã‚’æ¯”è¼ƒ:æ­£å¸¸å‹•ä½œã®ãŸã‚å¿…è¦ãªã—
+    // ãƒ†ã‚¹ãƒˆå¾Œã®å¾Œå‡¦ç†ï¼šå¿…è¦ãªã—
+  }
+  
+  /**
+   * ãƒ†ã‚¹ãƒˆã‚±ãƒ¼ã‚¹2 <br>
+   * é‡‘é¡è¨ˆç®—ãƒ¡ã‚½ãƒƒãƒ‰ã®æ­£å¸¸å‹•ä½œ
+   * å®šä¾¡ï¼š100,000
+   * ä¼šå“¡ï¼štrueï¼ˆã‚ã‚Šï¼‰
+   * å‰²å¼•ï¼š0ï¼ˆãªã—ï¼‰ <br>
+   * @throws Exception ä¾‹å¤–
+   */
+  @SuppressWarnings("static-access")
+  @Test
+  public void testCase2() throws Exception {
+    // ãƒ†ã‚¹ãƒˆå¯¾è±¡ã‚¯ãƒ©ã‚¹ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã®è¨­å®š
     PriceCheck sut = new PriceCheck( new BigDecimal( "100000" ), true, "0" );
-    // ƒeƒXƒg‘ÎÛƒNƒ‰ƒX‚ÌÀs
-    BigDecimal actual = sut.priceReturn();
-    // À‘ª’l‚ÆŠú‘Ò’l‚ğ”äŠr
+    // ãƒ†ã‚¹ãƒˆå¯¾è±¡ã‚¯ãƒ©ã‚¹ã®å®Ÿè¡Œ
+    BigDecimal actual = sut.priceCal();
+    // å®Ÿæ¸¬å€¤ã¨æœŸå¾…å€¤ã‚’æ¯”è¼ƒ
     assertThat( actual, is( new BigDecimal( "100000" ) ) );
-    // ƒeƒXƒgŒã‚ÌŒãˆ—
-    // Œãˆ—‚Ì•K—v‚È‚µ
+    // ãƒ†ã‚¹ãƒˆå¾Œã®å¾Œå‡¦ç†ï¼šå¿…è¦ãªã—
   }
 
   /**
-   * ƒeƒXƒgƒP[ƒX2 <br>
-   * ‹àŠzF123,456
-   * ‰ïˆõ“Á“TFtruei‚ ‚èj
-   * ƒN[ƒ|ƒ“F1i5%OFFj <br>
-   * @throws Exception —áŠO
+   * ãƒ†ã‚¹ãƒˆã‚±ãƒ¼ã‚¹3 <br>
+   * é‡‘é¡è¨ˆç®—ãƒ¡ã‚½ãƒƒãƒ‰ã®æ­£å¸¸å‹•ä½œ
+   * å®šä¾¡ï¼š123,456
+   * ä¼šå“¡ï¼štrueï¼ˆã‚ã‚Šï¼‰
+   * å‰²å¼•ï¼š1ï¼ˆ5%OFFï¼‰ <br>
+   * @throws Exception ä¾‹å¤–
    */
+  @SuppressWarnings("static-access")
   @Test
-  public void testCase2() throws Exception {
-    // ƒeƒXƒg‘ÎÛƒNƒ‰ƒX‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^‚Ìİ’è
+  public void testCase3() throws Exception {
+    // ãƒ†ã‚¹ãƒˆå¯¾è±¡ã‚¯ãƒ©ã‚¹ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã®è¨­å®š
     PriceCheck sut = new PriceCheck( new BigDecimal( "123456" ), true, "1" );
-    // ƒeƒXƒg‘ÎÛƒNƒ‰ƒX‚ÌÀs
-    BigDecimal actual = sut.priceReturn();
-    // À‘ª’l‚ÆŠú‘Ò’l‚ğ”äŠri¬”“_ˆÈ‰º‚ÌŒJ‚èã‚°‚ğŠm”Fj
+    // ãƒ†ã‚¹ãƒˆå¯¾è±¡ã‚¯ãƒ©ã‚¹ã®å®Ÿè¡Œ
+    BigDecimal actual = sut.priceCal();
+    // å®Ÿæ¸¬å€¤ã¨æœŸå¾…å€¤ã‚’æ¯”è¼ƒï¼ˆå°æ•°ç‚¹ä»¥ä¸‹ã®ç¹°ã‚Šä¸Šã’ã‚’ç¢ºèªï¼‰
     assertThat( actual, is( new BigDecimal( "117284" ) ) );
-    // ƒeƒXƒgŒã‚ÌŒãˆ—
-    // Œãˆ—‚Ì•K—v‚È‚µ
+    // ãƒ†ã‚¹ãƒˆå¾Œã®å¾Œå‡¦ç†ï¼šå¿…è¦ãªã—
   }
 }
