@@ -36,20 +36,6 @@ public class PriceCheck {
   }
   
   /**
-   * メインメソッド <br />
-   * 金額計算メソッドを実行 <br />
-   * @param args 起動時引数
-   * @throws Exception 例外
-   */
-  public static void main(String[] args) throws Exception {
-    // 金額決定クラスを実行
-    // 引数は後々外部から入力できるようにする。
-    // 今は仮の値を引数とする。
-    new PriceCheck(new BigDecimal("10000"), true, "1");
-    priceCal();
-  }
-  
-  /**
    * 金額計算メソッド <br />
    * 定価、会員、割引情報を取得し、最終的な支払金額を計算する <br />
    * @throws Exception 例外
