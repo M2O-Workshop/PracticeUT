@@ -18,20 +18,6 @@ import org.junit.Test;
 public class PriceCheckTest {
   /**
    * テストケース1 <br>
-   * メインメソッドの正常動作<br>
-   * @throws Exception 例外
-   */
-  @Test
-  public void testCase1() throws Exception {
-    // テストの準備:必要なし
-    // テスト対象クラスの実行
-    PriceCheck.main(new String[]{});
-    // 実測値と期待値を比較:正常動作のため必要なし
-    // テスト後の後処理：必要なし
-  }
-  
-  /**
-   * テストケース2 <br>
    * 金額計算メソッドの正常動作
    * 定価：100,000
    * 会員：true（あり）
@@ -40,7 +26,7 @@ public class PriceCheckTest {
    */
   @SuppressWarnings("static-access")
   @Test
-  public void testCase2() throws Exception {
+  public void testCase1() throws Exception {
     // テスト対象クラスのコンストラクタの設定
     PriceCheck sut = new PriceCheck( new BigDecimal( "100000" ), true, "0" );
     // テスト対象クラスの実行
@@ -51,7 +37,7 @@ public class PriceCheckTest {
   }
 
   /**
-   * テストケース3 <br>
+   * テストケース2 <br>
    * 金額計算メソッドの正常動作
    * 定価：123,456
    * 会員：true（あり）
@@ -60,7 +46,7 @@ public class PriceCheckTest {
    */
   @SuppressWarnings("static-access")
   @Test
-  public void testCase3() throws Exception {
+  public void testCase2() throws Exception {
     // テスト対象クラスのコンストラクタの設定
     PriceCheck sut = new PriceCheck( new BigDecimal( "123456" ), true, "1" );
     // テスト対象クラスの実行
