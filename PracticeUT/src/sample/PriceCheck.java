@@ -21,8 +21,8 @@ public class PriceCheck {
    * 定価、会員、割引情報を取得し、最終的な支払金額を計算する <br />
    * 
    * @param price 定価
-   * @param member 会員
-   * @param discount 割引
+   * @param member 会員（true：会員、false：非会員）
+   * @param discount 割引（"0"：0%、"1"：5%、"2"：10%、"3"：20%、その他：0%）
    * @throws Exception 例外
    * @return total 支払金額
    */
